@@ -2,13 +2,8 @@
 import scrapy
 from django.utils import timezone
 from scrapy.http import Response
-from scrapy_djangoitem import DjangoItem
 
-from core.models import Event
-
-
-class EventItem(DjangoItem):
-    django_model = Event
+from crawling.crawling.items import EventItem
 
 
 class DkAarhusVoxhallSpider(scrapy.Spider):

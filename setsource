@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -o allexport
+source dev.env
+
+[[ -f venv/bin/activate ]] && source venv/bin/activate

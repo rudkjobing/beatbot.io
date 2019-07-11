@@ -5,10 +5,10 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy_djangoitem import DjangoItem
+
+from core.models import Event
 
 
-class CrawlingItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class EventItem(DjangoItem):
+    django_model = Event
