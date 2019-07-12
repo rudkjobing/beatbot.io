@@ -16,6 +16,6 @@ class Command(BaseCommand):
         os.environ.setdefault('SCRAPY_SETTINGS_MODULE', settings_file_path)
         process = CrawlerProcess(get_project_settings())
 
-        # process.crawl(DkAarhusVoxhallSpider)
-        process.crawl(DkAarhusRadarSpider)
+        process.crawl(DkAarhusVoxhallSpider)
+        # process.crawl(DkAarhusRadarSpider)
         process.start()
