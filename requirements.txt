@@ -4,3 +4,4 @@ scrapy-djangoitem==1.1.1
 django-money==0.15
 psycopg2
 dj_database_url
+dateparser
