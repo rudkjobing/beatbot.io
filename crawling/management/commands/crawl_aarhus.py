@@ -5,7 +5,11 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
 from crawling.crawling.spiders.dk_aarhus_radar import DkAarhusRadarSpider
-from crawling.crawling.spiders.dk_aarhus_voxhall import DkAarhusVoxhallSpider
+from crawling.crawling.spiders.dk_aarhus_voxhall_heavy import DkAarhusVoxhallHeavySpider
+from crawling.crawling.spiders.dk_aarhus_voxhall_jazz import DkAarhusVoxhallJazzSpider
+from crawling.crawling.spiders.dk_aarhus_voxhall_rock import DkAarhusVoxhallRockSpider
+from crawling.crawling.spiders.dk_aarhus_voxhall_urban import DkAarhusVoxhallUrbanSpider
+from crawling.crawling.spiders.dk_aarhus_voxhall_world import DkAarhusVoxhallWorldSpider
 
 
 class Command(BaseCommand):
@@ -16,6 +20,10 @@ class Command(BaseCommand):
         os.environ.setdefault('SCRAPY_SETTINGS_MODULE', settings_file_path)
         process = CrawlerProcess(get_project_settings())
 
-        process.crawl(DkAarhusVoxhallSpider)
-        # process.crawl(DkAarhusRadarSpider)
+        process.crawl(DkAarhusVoxhallWorldSpider)
+        process.crawl(DkAarhusVoxhallHeavySpider)
+        process.crawl(DkAarhusVoxhallRockSpider)
+        process.crawl(DkAarhusVoxhallUrbanSpider)
+        process.crawl(DkAarhusVoxhallJazzSpider)
+        process.crawl(DkAarhusRadarSpider)
         process.start()

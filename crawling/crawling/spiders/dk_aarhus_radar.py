@@ -21,16 +21,25 @@ class DkAarhusRadarSpider(scrapy.Spider):
 
     def parse_concert(self, response):
         venue = "Radar"
-        band = response.xpath("/html/body/div[1]/main/article/aside/h1/text()").extract_first()
-        price = response.xpath("//div[contains(@class,'val-price')]/text()").extract_first()
-        date = response.xpath("//div[contains(@class,'val-date')]/text()").extract_first()
-        time = response.xpath("//div[contains(@class,'val-hours')]/text()").extract_first()
-        genres = response.xpath("//div[contains(@class,'val-genre')]/text()").extract_first()
+        band = response.xpath(
+            "/html/body/div[1]/main/article/aside/h1/text()"
+        ).extract_first()
+        price = response.xpath(
+            "//div[contains(@class,'val-price')]/text()"
+        ).extract_first()
+        date = response.xpath(
+            "//div[contains(@class,'val-date')]/text()"
+        ).extract_first()
+        time = response.xpath(
+            "//div[contains(@class,'val-hours')]/text()"
+        ).extract_first()
+        genres = response.xpath(
+            "//div[contains(@class,'val-genre')]/text()"
+        ).extract_first()
 
         item = EventItem()
         item["venue"] = venue
         item["artist"] = band.strip()
-        item["band"] = band.strip()
         item["ticket_price"] = re.search("(\d+),-", price).group(1)
         item["genres"] = [genre.strip() for genre in genres.split("/")]
         item["datetime_of_performance"] = DkAarhusRadarSpider.__make_date(date, time)
