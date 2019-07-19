@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Optional, List
+from typing import Optional, List, Set
 
 
 class Genre(Enum):
@@ -12,13 +12,14 @@ class Genre(Enum):
     WORLD = "World"
     FOLK = "Folk"
     SYNTH = "Synth"
+    URBAN = "Urban"
 
 
-def determine_genre(raw: str) -> List[Genre]:
-    resulting_genres = []
-    normalized_raw: str = raw.lower()
+def determine_genres(raw: str) -> Set[Genre]:
+    resulting_genres = set()
+    normalized_raw: str = raw.lower().replace("-", "").replace(" ", "").replace("heavy", "metal")
     for genre in Genre:
         normalized_genre: str = genre.value.lower()
         if normalized_genre in normalized_raw:
-            resulting_genres.append(genre)
+            resulting_genres.add(genre)
     return resulting_genres

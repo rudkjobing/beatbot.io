@@ -5,6 +5,7 @@ import dateparser
 import scrapy
 from scrapy.http import Response
 
+from core.genres import determine_genres
 from crawling.crawling.items import EventItem
 
 
@@ -41,7 +42,8 @@ class DkAarhusRadarSpider(scrapy.Spider):
         item["venue"] = venue
         item["artist"] = band.strip()
         item["ticket_price"] = re.search("(\d+),-", price).group(1)
-        item["genres"] = [genre.strip() for genre in genres.split("/")]
+        item["raw_genres"] = [genre.strip() for genre in genres.split("/")]
+        item["genres"] = list(determine_genres(genres))
         item["datetime_of_performance"] = DkAarhusRadarSpider.__make_date(date, time)
         item["source_url"] = response.url.strip()
         yield item

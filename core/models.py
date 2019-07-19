@@ -10,6 +10,7 @@ class Event(models.Model):
     artist = models.CharField(max_length=255)
     ticket_price = MoneyField(max_digits=10, decimal_places=2, default_currency='DKK')
     datetime_of_performance = models.DateTimeField()
+    raw_genres = ArrayField(models.CharField(max_length=255, blank=True))
     genres = ArrayField(models.CharField(max_length=255, blank=True))
 
     class Meta:
