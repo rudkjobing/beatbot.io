@@ -15,6 +15,8 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import dj_database_url
 import django_heroku
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -114,5 +116,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+sentry_sdk.init(
+    dsn="https://9ed53748b6f2419898dac8ebdf69d5a5@sentry.io/1515016",
+    integrations=[DjangoIntegration()]
+)
 
 django_heroku.settings(locals())

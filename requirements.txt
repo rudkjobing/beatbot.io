@@ -7,3 +7,4 @@ dj_database_url
 dateparser
 gunicorn
 django-heroku
+sentry-sdk==0.10.2
