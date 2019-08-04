@@ -13,6 +13,7 @@ class Event(models.Model):
     datetime_of_performance = models.DateTimeField()
     raw_genres = ArrayField(models.CharField(max_length=255, blank=True))
     genres = ArrayField(models.CharField(max_length=255, blank=True))
+    description = models.TextField(default="")
 
     class Meta:
         unique_together = ('venue', 'artist', 'datetime_of_performance',)

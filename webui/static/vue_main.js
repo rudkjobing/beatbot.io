@@ -6,9 +6,16 @@ onload = () => {
         }
     });
 };
+moment.locale('da');
 
 Vue.filter('formatDate', function (value) {
     if (value) {
-        return moment(String(value)).tz("Europe/Berlin").format('DD-MM YYYY HH:mm')
+        return moment(String(value)).format('dddd [d.] D MMMM')
     }
-})
+});
+
+Vue.filter('formatPrice', function (value) {
+    if (value) {
+        return value + ".-"
+    }
+});

@@ -1,42 +1,47 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static "vue.css" %}"/>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.26/moment-timezone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
 </head>
 <body>
 {% verbatim %}
-<div id="app">
+<div v-cloak id="app">
     <div class="viewport">
-        <div class="container" v-for="event in events">
-            <a v-bind:href="event.source">
-                <div class="headline">
-                <div class="artist">{{ event.artist }}</div>
-                <div class="genres">
-                    <div class="genre" v-for="genre in event.genres">
-                        {{ genre }}
+        <div class="event-container" v-for="event in events">
+            <div class="event-header">
+                <a v-bind:href="event.source" target="_blank">
+                    <div class="headline">
+                        <div class="artist">{{ event.artist }}</div>
+                        <div class="genres">
+                            <div class="genre" v-for="genre in event.genres">
+                                {{ genre }}
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="venue">{{ event.venue }}</div>
             </div>
-            <div class="venue">{{ event.venue }}</div>
-            <div>{{ event.ticket_price }}</div>
-            <div>{{ event.datetime_of_performance | formatDate }}</div>
+            <div class="event-body" v-html="event.description">
+            </div>
+            <div class="event-footer">
+                <div>{{ event.datetime_of_performance | formatDate }}</div>
+                <div>{{ event.ticket_price | formatPrice }}</div>
+            </div>
             </a>
         </div>
     </div>
 </div>
 {% endverbatim %}
 
-{% load static %}
 <script type="application/javascript">
     var props =
     {{ props|safe }}
 </script>
 
 <script src="{% static "vue_main.js" %}"></script>
-<link rel="stylesheet" href="{% static "vue.css" %}"/>
 </body>
 </html>

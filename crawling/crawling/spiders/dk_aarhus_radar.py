@@ -37,6 +37,9 @@ class DkAarhusRadarSpider(scrapy.Spider):
         genres = response.xpath(
             "//div[contains(@class,'val-genre')]/text()"
         ).extract_first()
+        description = response.xpath(
+            "//div[@class='content detail']"
+        ).extract_first()
 
         item = EventItem()
         item["venue"] = venue
@@ -46,6 +49,7 @@ class DkAarhusRadarSpider(scrapy.Spider):
         item["genres"] = list(determine_genres(genres))
         item["datetime_of_performance"] = DkAarhusRadarSpider.__make_date(date, time)
         item["source_url"] = response.url.strip()
+        item["description"] = description
         yield item
 
     @staticmethod

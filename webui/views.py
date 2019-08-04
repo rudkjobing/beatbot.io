@@ -18,7 +18,8 @@ def index(request: HttpRequest):
         'datetime_of_performance': event.datetime_of_performance.isoformat(),
         'ticket_price': float(event.ticket_price.amount),
         'genres': [Genre[genre].name for genre in event.genres],
-        'source': event.source_url
+        'source': event.source_url,
+        'description': event.description
     } for event in events]
 
     return render(request, "index.html", {
