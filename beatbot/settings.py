@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from distutils.util import strtobool
+
 import dj_database_url
 import django_heroku
 import sentry_sdk
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
+    'webui.apps.WebUIConfig',
     'crawling.apps.CrawlingConfig'
 ]
 
@@ -61,7 +64,7 @@ ROOT_URLCONF = 'beatbot.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR + '/' + 'webui/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,15 +114,16 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 STATIC_URL = '/static/'
 
-sentry_sdk.init(
-    dsn="https://9ed53748b6f2419898dac8ebdf69d5a5@sentry.io/1515016",
-    integrations=[DjangoIntegration()]
-)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 
-django_heroku.settings(locals())
+HEROKU = strtobool(os.environ.get('HEROKU', 'False'))
+if HEROKU:
+    sentry_sdk.init(
+        dsn="https://9ed53748b6f2419898dac8ebdf69d5a5@sentry.io/1515016",
+        integrations=[DjangoIntegration()]
+    )
+    django_heroku.settings(locals())

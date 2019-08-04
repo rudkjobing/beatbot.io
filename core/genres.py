@@ -14,6 +14,9 @@ class Genre(Enum):
     SYNTH = "Synth"
     URBAN = "Urban"
 
+    def __str__(self):
+        return self.name
+
 
 def determine_genres(raw: str) -> Set[Genre]:
     resulting_genres = set()

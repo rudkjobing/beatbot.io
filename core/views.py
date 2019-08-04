@@ -4,10 +4,11 @@ from django.http import HttpRequest, JsonResponse
 from django.utils import timezone
 
 from core.models import Event
+from core.public import get_upcomming_events
 
 
 def upcomming_events(request: HttpRequest):
-    events = Event.objects.filter(datetime_of_performance__gt=timezone.now())
+    events = get_upcomming_events()
 
     serialized_events = [{
         'venue': event.venue,

@@ -1,0 +1,45 @@
+body {
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+}
+
+.headline {
+    margin: 10px 0 0 0;
+    border-bottom: 1px solid #5b80b2;
+    color: #5b80b2;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container:hover {
+    background: #efefef;
+}
+
+.artist {
+
+}
+
+a {
+  color: blue;
+  text-decoration: none; /* no underline */
+}
+
+.genres {
+    display: flex;
+    color: black;
+}
+
+.genre {
+    margin-left: 5px;
+}
+
+.venue {
+    margin-top: 0;
+    font-size: 0.8em;
+}
+
+.viewport {
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
