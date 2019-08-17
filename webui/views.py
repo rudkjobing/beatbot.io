@@ -1,6 +1,7 @@
 import json
 from typing import List
 
+from django.core.paginator import Paginator
 from django.http import HttpRequest
 from django.shortcuts import render
 
@@ -11,6 +12,14 @@ from core.public import get_upcomming_events
 
 def index(request: HttpRequest):
     events: List[Event] = get_upcomming_events()
+    paginator = Paginator(events, 20)
+
+    page = request.GET.get("page")
+
+    if page:
+        page = int(page)
+    else:
+        page = 1
 
     serialized_events = [{
         'venue': event.venue,
@@ -20,7 +29,7 @@ def index(request: HttpRequest):
         'genres': [Genre[genre].name for genre in event.genres],
         'source': event.source_url,
         'description': event.description
-    } for event in events]
+    } for event in paginator.page(page)]
 
     return render(request, "index.html", {
         "title": "BeatBot.io",
