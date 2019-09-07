@@ -32,7 +32,7 @@ class DkAarhusVoxhallBaseSpider(scrapy.Spider):
 
         venue = response.xpath("//tr[@class='concert-place']//a/text()").extract_first()
         ticket_price = response.xpath("//aside[@class='sidebar-concert']//tr[last()]/td[last()]/text()").extract_first()
-        description = response.xpath("//div[@id='full-content']").extract_first()
+        description = response.xpath("//div[@class='teaser-text']/p/text()").extract_first()
         item = EventItem()
 
         if venue is None:

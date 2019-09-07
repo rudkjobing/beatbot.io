@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
     {% load static %}
     <meta charset="UTF-8">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{% static "vue.css" %}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
 </head>
 <body>
 {% verbatim %}
 <div v-cloak id="app">
-    <div class="viewport">
-        <div class="event-container" v-for="event in events">
-            <div class="event-header">
-                <a v-bind:href="event.source" target="_blank">
-                    <div class="headline">
-                        <div class="artist">{{ event.artist }}</div>
-                        <div class="genres">
-                            <div class="genre" v-for="genre in event.genres">
-                                {{ genre }}
-                            </div>
+    <div class="container-fluid">
+        <h1>BeatBot</h1>
+        <div class="events">
+            <div v-for="event in events">
+                <div class="row">
+                    <h3 class="col-sm">{{ event.artist }}</h3>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="genre m-1" v-for="genre in event.genres">
+                            {{ genre }}
                         </div>
                     </div>
-                    <div class="venue">{{ event.venue }}</div>
+                    <div class="col-sm">{{ event.venue }}</div>
+                    <div class="col-sm">{{ event.ticket_price | formatPrice }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">{{ event.description }}</div>
+                </div>
+                <div class="row">
+                    <div class="col">{{ event.datetime_of_performance | formatDate }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <a v-bind:href="event.source" target="_blank" class="btn btn-block btn-secondary">Køb biletter</a>
+                    </div>
+                </div>
+
             </div>
-            <div class="event-body" v-html="event.description">
-            </div>
-            <div class="event-footer">
-                <div>{{ event.datetime_of_performance | formatDate }}</div>
-                <div>{{ event.ticket_price | formatPrice }}</div>
-            </div>
-            </a>
         </div>
     </div>
 </div>

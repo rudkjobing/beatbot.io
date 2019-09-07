@@ -11,8 +11,6 @@ from core.public import get_upcomming_events
 
 
 def index(request: HttpRequest):
-    events: List[Event] = get_upcomming_events()
-    paginator = Paginator(events, 20)
 
     page = request.GET.get("page")
 
@@ -20,6 +18,10 @@ def index(request: HttpRequest):
         page = int(page)
     else:
         page = 1
+
+    events: List[Event] = get_upcomming_events()
+
+    paginator = Paginator(events, 20)
 
     serialized_events = [{
         'venue': event.venue,

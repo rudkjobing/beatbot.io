@@ -38,7 +38,7 @@ class DkAarhusRadarSpider(scrapy.Spider):
             "//div[contains(@class,'val-genre')]/text()"
         ).extract_first()
         description = response.xpath(
-            "//div[@class='content detail']"
+            "//aside[@class='event-sidebar']/h5/text()"
         ).extract_first()
 
         item = EventItem()
