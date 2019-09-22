@@ -138,3 +138,4 @@ if HEROKU:
         integrations=[DjangoIntegration()]
     )
     django_heroku.settings(locals())
+    DEBUG = False
