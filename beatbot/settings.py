@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
     'webui.apps.WebUIConfig',
+    "anymail",
     'crawling.apps.CrawlingConfig'
 ]
 
@@ -79,6 +80,13 @@ TEMPLATES = [
         },
     },
 ]
+
+ANYMAIL = {
+    "SENDINBLUE_API_KEY": "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",
+}
+
+EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"
+
 
 WSGI_APPLICATION = 'beatbot.wsgi.application'
 

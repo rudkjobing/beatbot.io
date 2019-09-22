@@ -9,3 +9,4 @@ gunicorn
 django-heroku
 sentry-sdk==0.10.2
 whitenoise
+django-anymail

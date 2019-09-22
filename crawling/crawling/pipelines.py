@@ -21,3 +21,4 @@ class CrawlingPipeline(object):
                         existing_item.genres.append(genre)
                         existing_item.save(update_fields=["genres"])
         return item
+
