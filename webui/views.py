@@ -2,7 +2,7 @@ import json
 from typing import List
 
 from django.core.paginator import Paginator
-from django.http import HttpRequest
+from django.http import HttpRequest, Http404
 from django.shortcuts import render
 
 from core.genres import Genre
@@ -22,6 +22,9 @@ def index(request: HttpRequest):
     events: List[Event] = get_upcomming_events()
 
     paginator = Paginator(events, 20)
+
+    if page > paginator.num_pages:
+        raise Http404
 
     serialized_events = [{
         'venue': event.venue,
